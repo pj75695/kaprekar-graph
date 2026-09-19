@@ -12,7 +12,7 @@ data.nodes.forEach(node => {
         x: Math.random() * 100,
         y: Math.random() * 100,
         size: 6,
-        color: "#3b82f6" // Vibrant blue
+        color: "#3b82f6", // Vibrant blue
     });
 });
 
@@ -28,4 +28,35 @@ data.links.forEach(link => {
 
 // Render the network onto the DOM canvas element
 const container = document.getElementById("sigma-container");
-const renderer = new Sigma(graph, container);
+
+let selectedNode = null;
+
+
+const renderer = new Sigma(graph, container, {
+    labelColor: {
+        color: "#FFD700"
+    },
+
+    nodeReducer: (node, data) => {
+        const res = { ...data };
+
+        if (node === selectedNode) {
+            res.color = "#fa1515";
+        }
+
+        return res;
+    }
+});
+
+
+// Render input
+const input = document.getElementById('value');
+
+// Listen for typing
+input.addEventListener("input", () => {
+    const value = input.value.trim();
+
+    selectedNode = graph.hasNode(value) ? value : null;
+
+    renderer.refresh();
+});

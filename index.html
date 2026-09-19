@@ -13,9 +13,28 @@
             overflow: hidden;
             background-color: #111827;
         }
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+        }
+        label {
+            color: white;
     </style>
 </head>
 <body>
+    <div id="controls">
+        <label for="value">Enter a 5 digit combination</label>
+        <input
+            type="text"
+            id="value"
+            maxlength="5"
+            inputmode="numeric"
+        >
+    </div>
     <div id="sigma-container"></div>
     <script type="module" src="/main.js"></script>
 </body>
